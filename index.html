@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Angeles Wildfire Empowerment Funds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2d3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+        }
+        h1, h2 {
+            color: #2d3e50;
+        }
+        .form-container {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="file"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="checkbox"] {
+            width: auto;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2d3e50;
+            color: white;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .form-row > div {
+            width: 48%;
+        }
+        .form-row div label {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 120px;
+        }
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .disclaimer label {
+            margin-top: 10px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        // Function to limit SSN input to exactly 9 digits and format it as XXX-XX-XXXX
+        function limitSSNInput(input) {
+            let ssn = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+
+            // Limit input to exactly 9 digits
+            if (ssn.length > 9) {
+                ssn = ssn.slice(0, 9);
+            }
+
+            // Format SSN as "XXX-XX-XXXX"
+            if (ssn.length > 5) {
+                ssn = ssn.slice(0, 3) + '-' + ssn.slice(3, 5) + '-' + ssn.slice(5, 9);
+            } else if (ssn.length > 3) {
+                ssn = ssn.slice(0, 3) + '-' + ssn.slice(3);
+            }
+
+            input.value = ssn;
+        }
+
+        // Function to enable submit button if all fields are valid
+        function enableSubmit() {
+            const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+            const isFormValid = Array.from(requiredFields).every(field => field.value !== "");
+            document.getElementById('submit-btn').disabled = !isFormValid;
+        }
+
+        // Function to validate if emails match
+        function validateEmails() {
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirm_email').value;
+            const submitButton = document.getElementById('submit-btn');
+
+            if (email !== confirmEmail) {
+                submitButton.disabled = true;
+                alert("Email addresses do not match.");
+            } else {
+                enableSubmit(); // Recheck the rest of the form validity
+            }
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Los Angeles Wildfire Empowerment Funds</h1>
+    <p>Providing Assistance to Families and Individuals Affected by the Los Angeles Wildfires</p>
+</header>
+
+<section>
+    <h2>Enroll for Wildfire Empowerment Funds</h2>
+    <p>Please fill out the form below to apply for assistance. Ensure that you provide accurate and complete information to help expedite your application process.</p>
+
+    <div class="form-container">
+        <form action="submit_form.php" method="POST" enctype="multipart/form-data">
+            <div class="form-row">
+                <div>
+                    <label for="surname">Surname (Last Name):</label>
+                    <input type="text" id="surname" name="surname" required oninput="enableSubmit()">
+                </div>
+                <div>
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required oninput="enableSubmit()">
+                </div>
+                <div>
+                    <label for="middle_name">Middle Name:</label>
+                    <input type="text" id="middle_name" name="middle_name" oninput="enableSubmit()">
+                </div>
+            </div>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required oninput="enableSubmit()">
+
+            <label for="confirm_email">Confirm Email Address:</label>
+            <input type="email" id="confirm_email" name="confirm_email" required oninput="validateEmails()">
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required oninput="enableSubmit()" placeholder="(XXX) XXX-XXXX">
+
+            <label for="ssn">Social Security Number (SSN):</label>
+            <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
+
+            <label for="address">Home Address:</label>
+            <input type="text" id="address" name="address" required oninput="enableSubmit()">
+
+            <label for="state">State:</label>
+            <select id="state" name="state" required oninput="enableSubmit()">
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+            </select>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required oninput="enableSubmit()">
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" required oninput="enableSubmit()">
+
+            <div class="form-row">
+                <div>
+                    <label for="annual_income">Annual Income:</label>
+                    <input type="number" id="annual_income" name="annual_income" required oninput="enableSubmit()">
+                </div>
+                <div>
+                    <label for="household_size">How many people live in your home?</label>
+                    <input type="number" id="household_size" name="household_size" required oninput="enableSubmit()">
+                </div>
+            </div>
+
+            <label for="head_of_household">Are you the Head of Household?</label>
+            <select id="head_of_household" name="head_of_household" required oninput="enableSubmit()">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="lgbtqia">Are you a member of LGBTQIA?</label>
+            <select id="lgbtqia" name="lgbtqia" required oninput="enableSubmit()">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <label for="education_level">Highest Educational Level Completed:</label>
+            <select id="education_level" name="education_level" required oninput="enableSubmit()">
+                <option value="none">None</option>
+                <option value="high_school">High School</option>
+                <option value="some_college">Some College</option>
+                <option value="associate_degree">Associate's Degree</option>
+                <option value="bachelor_degree">Bachelor's Degree</option>
+                <option value="graduate_degree">Graduate Degree</option>
+            </select>
+
+            <label for="date_of_birth">Date of Birth:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required oninput="enableSubmit()">
+
+            <label for="id_upload">Upload a Valid ID (Driver's License, State ID, etc.):</label>
+            <input type="file" id="id_upload" name="id_upload" required oninput="enableSubmit()">
+
+            <label for="property_loss">Briefly describe the property loss or damage:</label>
+            <textarea id="property_loss" name="property_loss" required oninput="enableSubmit()"></textarea>
+
+            <div class="disclaimer">
+                <h3>Important Information & Disclaimer</h3>
+                <p>By signing this form, you agree to provide accurate and truthful information regarding your application for the wildfire empowerment funds. Any false or misleading information may result in disqualification from receiving assistance.</p>
+
+                <label for="authorization">
+                    <input type="checkbox" id="authorization" name="authorization" required oninput="enableSubmit()">
+                    I authorize the submission of my application and confirm the accuracy of the information provided.
+                </label>
+
+                <label for="citizen_status">
+                    <input type="checkbox" id="citizen_status" name="citizen_status" required oninput="enableSubmit()">
+                    I confirm that I am a U.S. citizen or legal resident.
+                </label>
+            </div>
+
+            <label for="signature">Signature (Type Full Name):</label>
+            <input type="text" id="signature" name="signature" placeholder="Full Name" required oninput="enableSubmit()">
+
+            <button type="submit" id="submit-btn" disabled>Submit Application</button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2025 Los Angeles Wildfire Empowerment Fund. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
