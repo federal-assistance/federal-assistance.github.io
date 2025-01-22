@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Angeles Wildfire Empowerment Funds</title>
-    <style>
+     <style>
         /* General styles for the page */
         body {
             font-family: Arial, sans-serif;
@@ -12,13 +12,16 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
+
         header {
             background-color: #2d3e50;
             color: white;
             text-align: center;
             padding: 20px;
         }
+
         section {
             padding: 20px;
             margin: 20px auto;
@@ -27,19 +30,24 @@
             width: 100%;
             max-width: 800px;
         }
+
         h1, h2 {
             color: #2d3e50;
         }
+
         .form-container {
             background-color: #e9ecef;
             padding: 20px;
             border-radius: 8px;
+            box-sizing: border-box; /* Ensure padding is included within the width */
         }
+
         label {
             font-weight: bold;
             margin-top: 10px;
             display: block;
         }
+
         input[type="text"],
         input[type="email"],
         input[type="file"],
@@ -48,15 +56,19 @@
         select,
         textarea {
             width: 100%;
+            max-width: calc(100% - 32px); /* Ensures input fields stay within the container */
             padding: 8px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding is included within the width */
         }
+
         input[type="checkbox"] {
             width: auto;
             margin: 5px 0;
         }
+
         button {
             background-color: #007bff;
             color: white;
@@ -67,45 +79,56 @@
             width: 100%;
             margin-top: 20px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .footer {
             text-align: center;
             padding: 10px;
             background-color: #2d3e50;
             color: white;
         }
+
         .form-row {
             display: flex;
             justify-content: space-between;
             gap: 20px;
             flex-wrap: wrap;
         }
+
         .form-row > div {
             width: 48%;
         }
+
         .form-row div label {
             display: inline-block;
             margin-bottom: 5px;
         }
+
         textarea {
             width: 100%;
+            max-width: calc(100% - 32px); /* Ensure textarea stays within the container */
             padding: 8px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
             height: 120px;
+            box-sizing: border-box;
         }
+
         .disclaimer {
             background-color: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
             margin-top: 20px;
         }
+
         .disclaimer label {
             margin-top: 10px;
         }
+
         button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
@@ -119,9 +142,27 @@
             button {
                 width: auto;
             }
+
+            section {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="file"],
+            input[type="number"],
+            input[type="date"],
+            select,
+            textarea {
+                max-width: 100%; /* Ensure fields fit within the screen */
+            }
         }
     </style>
-
     <script>
         // Function to limit SSN input to exactly 9 digits and format it as XXX-XX-XXXX
         function limitSSNInput(input) {
