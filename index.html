@@ -129,6 +129,25 @@
             input.value = ssn;
         }
 
+        // Function to format phone number as (XXX) XXX-XXXX
+        function formatPhoneNumber(input) {
+            let phone = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+
+            // Limit input to 10 digits
+            if (phone.length > 10) {
+                phone = phone.slice(0, 10);
+            }
+
+            // Format phone number as (XXX) XXX-XXXX
+            if (phone.length > 6) {
+                phone = `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6, 10)}`;
+            } else if (phone.length > 3) {
+                phone = `(${phone.slice(0, 3)}) ${phone.slice(3)}`;
+            }
+
+            input.value = phone;
+        }
+
         // Function to enable submit button if all fields are valid
         function enableSubmit() {
             const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
@@ -154,6 +173,7 @@
 <body>
 
 <header>
+    <img src="fema.png" alt="FEMA Logo" style="max-width: 150px; height: auto;">
     <h1>Los Angeles Wildfire Empowerment Funds</h1>
     <p>Providing Assistance to Families and Individuals Affected by the Los Angeles Wildfires</p>
 </header>
@@ -186,7 +206,7 @@
             <input type="email" id="confirm_email" name="confirm_email" required oninput="validateEmails()">
 
             <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" required oninput="enableSubmit()" placeholder="(XXX) XXX-XXXX">
+            <input type="text" id="phone" name="phone" required oninput="formatPhoneNumber(this)" maxlength="13" placeholder="(XXX) XXX-XXXX" oninput="enableSubmit()">
 
             <label for="ssn">Social Security Number (SSN):</label>
             <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
