@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Angeles Wildfire Empowerment Funds</title>
     <style>
+        /* General styles for the page */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -79,6 +80,7 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
+            flex-wrap: wrap;
         }
         .form-row > div {
             width: 48%;
@@ -108,6 +110,16 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+
+        /* Responsive styles */
+        @media screen and (max-width: 600px) {
+            .form-row > div {
+                width: 100%;
+            }
+            button {
+                width: auto;
+            }
+        }
     </style>
     <script>
         // Function to limit SSN input to exactly 9 digits and format it as XXX-XX-XXXX
@@ -129,7 +141,7 @@
             input.value = ssn;
         }
 
-        // Function to format phone number as (XXX) XXX-XXXX
+        // Function to limit phone number input to exactly 10 digits and format it as (XXX) XXX-XXXX
         function formatPhoneNumber(input) {
             let phone = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
 
@@ -168,6 +180,20 @@
                 enableSubmit(); // Recheck the rest of the form validity
             }
         }
+
+        // Function to validate if SSNs match
+        function validateSSNs() {
+            const ssn = document.getElementById('ssn').value;
+            const confirmSSN = document.getElementById('confirm_ssn').value;
+            const submitButton = document.getElementById('submit-btn');
+
+            if (ssn !== confirmSSN) {
+                submitButton.disabled = true;
+                alert("SSN numbers do not match.");
+            } else {
+                enableSubmit(); // Recheck the rest of the form validity
+            }
+        }
     </script>
 </head>
 <body>
@@ -193,10 +219,6 @@
                     <label for="first_name">First Name:</label>
                     <input type="text" id="first_name" name="first_name" required oninput="enableSubmit()">
                 </div>
-                <div>
-                    <label for="middle_name">Middle Name:</label>
-                    <input type="text" id="middle_name" name="middle_name" oninput="enableSubmit()">
-                </div>
             </div>
 
             <label for="email">Email Address:</label>
@@ -210,6 +232,9 @@
 
             <label for="ssn">Social Security Number (SSN):</label>
             <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
+
+            <label for="confirm_ssn">Confirm SSN:</label>
+            <input type="text" id="confirm_ssn" name="confirm_ssn" required oninput="validateSSNs()" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
 
             <label for="address">Home Address:</label>
             <input type="text" id="address" name="address" required oninput="enableSubmit()">
