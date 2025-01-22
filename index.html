@@ -12,13 +12,17 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
         }
         header {
             background-color: #2d3e50;
             color: white;
             text-align: center;
             padding: 20px;
-            position: relative;
             width: 100%;
             box-sizing: border-box;
         }
@@ -31,11 +35,12 @@
         }
         section {
             padding: 20px;
-            margin: 20px auto;
+            margin: 20px;
             background-color: white;
             border-radius: 8px;
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
+            box-sizing: border-box;
         }
         h1, h2 {
             color: #2d3e50;
@@ -126,16 +131,25 @@
 
         /* Responsive styles */
         @media screen and (max-width: 600px) {
+            /* Ensure the body content is centered */
+            body {
+                justify-content: flex-start;
+                padding: 0;
+                height: auto;
+            }
+
             header {
                 padding: 10px;
+                text-align: center;
             }
             header img {
                 max-width: 120px;
             }
             section {
-                margin: 0; /* No margin for mobile to align with the header and footer */
+                margin: 0;
                 padding: 15px;
-                width: 100%; /* Ensure the section takes the full width */
+                width: 100%;
+                max-width: 100%; /* Ensure it uses the full width */
             }
             .footer {
                 padding: 15px;
@@ -143,12 +157,9 @@
             .form-container {
                 padding: 15px;
             }
-            /* Ensure the body has no margins and aligns with the header/footer */
-            body {
-                margin: 0; /* Remove body margins */
-            }
+            /* Remove margins and adjust padding */
             .form-row > div {
-                width: 100%; /* Stack form fields vertically on mobile */
+                width: 100%;
             }
             button {
                 width: auto;
