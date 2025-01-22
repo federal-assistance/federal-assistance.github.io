@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Angeles Wildfire Empowerment Funds</title>
-    <style>
+   <style>
         /* General styles for the page */
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,16 @@
             color: white;
             text-align: center;
             padding: 20px;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header img {
+            max-width: 150px;
+            height: auto;
+        }
+        header h1 {
+            margin: 10px 0;
         }
         section {
             padding: 20px;
@@ -75,6 +85,9 @@
             padding: 10px;
             background-color: #2d3e50;
             color: white;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
         }
         .form-row {
             display: flex;
@@ -113,11 +126,27 @@
 
         /* Responsive styles */
         @media screen and (max-width: 600px) {
+            header {
+                padding: 10px;
+            }
+            header img {
+                max-width: 120px;
+            }
             .form-row > div {
                 width: 100%;
             }
             button {
                 width: auto;
+            }
+            section {
+                margin: 10px;
+                padding: 15px;
+            }
+            .footer {
+                padding: 15px;
+            }
+            .form-container {
+                padding: 15px;
             }
         }
     </style>
