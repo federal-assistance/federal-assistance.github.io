@@ -230,11 +230,16 @@
             <label for="phone">Phone Number:</label>
             <input type="text" id="phone" name="phone" required oninput="formatPhoneNumber(this)" maxlength="13" placeholder="(XXX) XXX-XXXX" oninput="enableSubmit()">
 
-            <label for="ssn">Social Security Number (SSN):</label>
-            <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
-
-            <label for="confirm_ssn">Confirm SSN:</label>
-            <input type="text" id="confirm_ssn" name="confirm_ssn" required oninput="validateSSNs()" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
+            <div class="form-row">
+                <div>
+                    <label for="ssn">Social Security Number (SSN):</label>
+                    <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
+                </div>
+                <div>
+                    <label for="confirm_ssn">Confirm SSN:</label>
+                    <input type="text" id="confirm_ssn" name="confirm_ssn" required oninput="validateSSNs()" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
+                </div>
+            </div>
 
             <label for="address">Home Address:</label>
             <input type="text" id="address" name="address" required oninput="enableSubmit()">
