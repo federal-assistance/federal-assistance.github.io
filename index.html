@@ -14,9 +14,10 @@
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start; /* Ensures body content stays at the top */
+            height: 100%;
             box-sizing: border-box;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
         }
         header {
             background-color: #2d3e50;
@@ -49,6 +50,7 @@
             background-color: #e9ecef;
             padding: 20px;
             border-radius: 8px;
+            box-sizing: border-box;
         }
         label {
             font-weight: bold;
@@ -63,10 +65,14 @@
         select,
         textarea {
             width: 100%;
+            max-width: 90%; /* Limit width of the inputs to 90% of the container */
             padding: 8px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         input[type="checkbox"] {
             width: auto;
@@ -109,11 +115,15 @@
         }
         textarea {
             width: 100%;
+            max-width: 90%; /* Ensure text areas have the same width as input fields */
             padding: 8px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
             height: 120px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .disclaimer {
             background-color: #f8f9fa;
@@ -131,7 +141,7 @@
 
         /* Responsive styles */
         @media screen and (max-width: 600px) {
-            /* Ensure the body content is centered */
+            /* Ensure the body content stays centered */
             body {
                 justify-content: flex-start;
                 padding: 0;
@@ -157,9 +167,9 @@
             .form-container {
                 padding: 15px;
             }
-            /* Remove margins and adjust padding */
             .form-row > div {
                 width: 100%;
+                margin-bottom: 10px;
             }
             button {
                 width: auto;
