@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Angeles Wildfire Empowerment Funds</title>
-    <style>
+     <style>
         /* General styles for the page */
         body {
             font-family: Arial, sans-serif;
@@ -183,16 +183,23 @@
             input.value = ssn;
         }
 
-        // Function to mask SSN input fields as password once the user leaves the field
-        function maskSSN(inputId) {
-            const ssnField = document.getElementById(inputId);
-            ssnField.type = 'password'; // Mask the SSN field
-        }
+        // Function to limit phone number input to exactly 10 digits and format it as (XXX) XXX-XXXX
+        function formatPhoneNumber(input) {
+            let phone = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
 
-        // Function to unmask SSN input fields if needed when user clicks into the field again
-        function unmaskSSN(inputId) {
-            const ssnField = document.getElementById(inputId);
-            ssnField.type = 'text'; // Show the SSN field as text (unmasked) if needed
+            // Limit input to 10 digits
+            if (phone.length > 10) {
+                phone = phone.slice(0, 10);
+            }
+
+            // Format phone number as (XXX) XXX-XXXX
+            if (phone.length > 6) {
+                phone = `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6, 10)}`;
+            } else if (phone.length > 3) {
+                phone = `(${phone.slice(0, 3)}) ${phone.slice(3)}`;
+            }
+
+            input.value = phone;
         }
 
         // Function to enable submit button if all fields are valid
@@ -268,11 +275,11 @@
             <div class="form-row">
                 <div>
                     <label for="ssn">Social Security Number (SSN):</label>
-                    <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()" onblur="maskSSN('ssn')" onfocus="unmaskSSN('ssn')">
+                    <input type="text" id="ssn" name="ssn" required oninput="limitSSNInput(this)" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
                 </div>
                 <div>
                     <label for="confirm_ssn">Confirm SSN:</label>
-                    <input type="text" id="confirm_ssn" name="confirm_ssn" required maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()" onblur="maskSSN('confirm_ssn')" onfocus="unmaskSSN('confirm_ssn')">
+                    <input type="text" id="confirm_ssn" name="confirm_ssn" required onblur="validateSSNs()" maxlength="11" placeholder="123-45-6789" oninput="enableSubmit()">
                 </div>
             </div>
 
